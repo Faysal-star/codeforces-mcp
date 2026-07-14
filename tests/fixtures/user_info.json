@@ -1,0 +1,23 @@
+{
+ "status": "OK",
+ "result": [
+  {
+   "lastName": "Mahmud",
+   "country": "Bangladesh",
+   "lastOnlineTimeSeconds": 1775320544,
+   "city": "Khulna",
+   "rating": 1223,
+   "friendOfCount": 67,
+   "titlePhoto": "https://userpic.codeforces.org/1533709/title/9e4f18cc74fbe987.jpg",
+   "handle": "3.141f",
+   "avatar": "https://userpic.codeforces.org/1533709/avatar/60e71d528b146fe6.jpg",
+   "firstName": "Faysal",
+   "contribution": 0,
+   "organization": "KUET",
+   "rank": "pupil",
+   "maxRating": 1223,
+   "registrationTimeSeconds": 1590605504,
+   "maxRank": "pupil"
+  }
+ ]
+}

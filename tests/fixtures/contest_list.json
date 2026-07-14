@@ -1,0 +1,215 @@
+{
+ "status": "OK",
+ "result": [
+  {
+   "id": 2258,
+   "name": "Codeforces Round (Div. 2)",
+   "type": "CF",
+   "phase": "BEFORE",
+   "frozen": false,
+   "durationSeconds": 7200,
+   "startTimeSeconds": 1788014100,
+   "relativeTimeSeconds": -511574
+  },
+  {
+   "id": 2257,
+   "name": "Codeforces Round 1117 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 7200,
+   "startTimeSeconds": 1786977300,
+   "relativeTimeSeconds": 525225
+  },
+  {
+   "id": 2255,
+   "name": "Codeforces Round 1116 (Div. 1)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1786286100,
+   "relativeTimeSeconds": 1216426
+  },
+  {
+   "id": 2256,
+   "name": "Codeforces Round 1116 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1786286100,
+   "relativeTimeSeconds": 1216426
+  },
+  {
+   "id": 2253,
+   "name": "Educational Codeforces Round 193 (Rated for Div. 2)",
+   "type": "ICPC",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 7200,
+   "startTimeSeconds": 1786113300,
+   "relativeTimeSeconds": 1389226
+  },
+  {
+   "id": 2252,
+   "name": "Codeforces Round 1115 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 7200,
+   "startTimeSeconds": 1786026900,
+   "relativeTimeSeconds": 1475626
+  },
+  {
+   "id": 2254,
+   "name": "Codeforces Round 1114 (Div. 3)",
+   "type": "ICPC",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 8100,
+   "startTimeSeconds": 1785854100,
+   "relativeTimeSeconds": 1648426
+  },
+  {
+   "id": 2248,
+   "name": "Codeforces Round 1113 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1785594900,
+   "relativeTimeSeconds": 1907626
+  },
+  {
+   "id": 2249,
+   "name": "Codeforces Round 1112 (Div. 1)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1785076500,
+   "relativeTimeSeconds": 2426026
+  },
+  {
+   "id": 2250,
+   "name": "Codeforces Round 1112 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1785076500,
+   "relativeTimeSeconds": 2426026
+  },
+  {
+   "id": 2247,
+   "name": "Codeforces Round 1111 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 7200,
+   "startTimeSeconds": 1784385300,
+   "relativeTimeSeconds": 3117226
+  },
+  {
+   "id": 2245,
+   "name": "Spectral::Cup 2026 Round 3 (Codeforces Round 1110, Div. 1 + Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1784213100,
+   "relativeTimeSeconds": 3289426
+  },
+  {
+   "id": 2244,
+   "name": "Codeforces Round 1109 (Div. 3)",
+   "type": "ICPC",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 8100,
+   "startTimeSeconds": 1784039700,
+   "relativeTimeSeconds": 3462826
+  },
+  {
+   "id": 2246,
+   "name": "Codeforces Round 1108 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 8100,
+   "startTimeSeconds": 1783866900,
+   "relativeTimeSeconds": 3635626
+  },
+  {
+   "id": 2242,
+   "name": "Educational Codeforces Round 192 (Rated for Div. 2)",
+   "type": "ICPC",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 7200,
+   "startTimeSeconds": 1783348500,
+   "relativeTimeSeconds": 4154026
+  },
+  {
+   "id": 2241,
+   "name": "Codeforces Round 1107 (Div. 3)",
+   "type": "ICPC",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 8100,
+   "startTimeSeconds": 1782830100,
+   "relativeTimeSeconds": 4672426
+  },
+  {
+   "id": 2238,
+   "name": "Codeforces Round 1106 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 7200,
+   "startTimeSeconds": 1782657300,
+   "relativeTimeSeconds": 4845226
+  },
+  {
+   "id": 2239,
+   "name": "Codeforces Round 1105 (Div. 1)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1782570900,
+   "relativeTimeSeconds": 4931626
+  },
+  {
+   "id": 2240,
+   "name": "Codeforces Round 1105 (Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1782570900,
+   "relativeTimeSeconds": 4931626
+  },
+  {
+   "id": 2237,
+   "name": "Order Capital Round 2 (Codeforces Round 1104, Div. 1 + Div. 2)",
+   "type": "CF",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 10800,
+   "startTimeSeconds": 1781793300,
+   "relativeTimeSeconds": 5709226
+  },
+  {
+   "id": 2236,
+   "name": "Codeforces Round 1103 (Div. 3)",
+   "type": "ICPC",
+   "phase": "FINISHED",
+   "frozen": false,
+   "durationSeconds": 9000,
+   "startTimeSeconds": 1781274900,
+   "relativeTimeSeconds": 6227626
+  }
+ ]
+}

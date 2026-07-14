@@ -1,0 +1,194 @@
+{
+ "status": "OK",
+ "result": [
+  {
+   "contestId": 1611,
+   "contestName": "Codeforces Round 756 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 13243,
+   "ratingUpdateTimeSeconds": 1637859000,
+   "oldRating": 0,
+   "newRating": 348
+  },
+  {
+   "contestId": 1618,
+   "contestName": "Codeforces Round 760 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 13841,
+   "ratingUpdateTimeSeconds": 1639500600,
+   "oldRating": 348,
+   "newRating": 568
+  },
+  {
+   "contestId": 1619,
+   "contestName": "Codeforces Round 762 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 13807,
+   "ratingUpdateTimeSeconds": 1640019000,
+   "oldRating": 568,
+   "newRating": 708
+  },
+  {
+   "contestId": 1615,
+   "contestName": "Codeforces Global Round 18",
+   "handle": "3.141f",
+   "rank": 11675,
+   "ratingUpdateTimeSeconds": 1640365500,
+   "oldRating": 708,
+   "newRating": 751
+  },
+  {
+   "contestId": 1622,
+   "contestName": "Educational Codeforces Round 120 (Rated for Div. 2)",
+   "handle": "3.141f",
+   "rank": 13768,
+   "ratingUpdateTimeSeconds": 1640622900,
+   "oldRating": 751,
+   "newRating": 781
+  },
+  {
+   "contestId": 1651,
+   "contestName": "Educational Codeforces Round 124 (Rated for Div. 2)",
+   "handle": "3.141f",
+   "rank": 13717,
+   "ratingUpdateTimeSeconds": 1646930100,
+   "oldRating": 781,
+   "newRating": 757
+  },
+  {
+   "contestId": 1659,
+   "contestName": "Codeforces Round 782 (Div. 2)",
+   "handle": "3.141f",
+   "rank": 5526,
+   "ratingUpdateTimeSeconds": 1650214200,
+   "oldRating": 757,
+   "newRating": 860
+  },
+  {
+   "contestId": 1668,
+   "contestName": "Codeforces Round 783 (Div. 2)",
+   "handle": "3.141f",
+   "rank": 8925,
+   "ratingUpdateTimeSeconds": 1650386100,
+   "oldRating": 860,
+   "newRating": 761
+  },
+  {
+   "contestId": 1671,
+   "contestName": "Educational Codeforces Round 127 (Rated for Div. 2)",
+   "handle": "3.141f",
+   "rank": 7437,
+   "ratingUpdateTimeSeconds": 1650645300,
+   "oldRating": 761,
+   "newRating": 819
+  },
+  {
+   "contestId": 1673,
+   "contestName": "Codeforces Round 785 (Div. 2)",
+   "handle": "3.141f",
+   "rank": 8072,
+   "ratingUpdateTimeSeconds": 1651336500,
+   "oldRating": 819,
+   "newRating": 818
+  },
+  {
+   "contestId": 1674,
+   "contestName": "Codeforces Round 786 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 9254,
+   "ratingUpdateTimeSeconds": 1651509300,
+   "oldRating": 818,
+   "newRating": 824
+  },
+  {
+   "contestId": 1675,
+   "contestName": "Codeforces Round 787 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 5063,
+   "ratingUpdateTimeSeconds": 1651769400,
+   "oldRating": 824,
+   "newRating": 934
+  },
+  {
+   "contestId": 1676,
+   "contestName": "Codeforces Round 790 (Div. 4)",
+   "handle": "3.141f",
+   "rank": 7312,
+   "ratingUpdateTimeSeconds": 1652201100,
+   "oldRating": 934,
+   "newRating": 962
+  },
+  {
+   "contestId": 1702,
+   "contestName": "Codeforces Round 805 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 8481,
+   "ratingUpdateTimeSeconds": 1657471800,
+   "oldRating": 962,
+   "newRating": 975
+  },
+  {
+   "contestId": 1703,
+   "contestName": "Codeforces Round 806 (Div. 4)",
+   "handle": "3.141f",
+   "rank": 4560,
+   "ratingUpdateTimeSeconds": 1657644600,
+   "oldRating": 975,
+   "newRating": 1049
+  },
+  {
+   "contestId": 1712,
+   "contestName": "Codeforces Round 813 (Div. 2)",
+   "handle": "3.141f",
+   "rank": 6904,
+   "ratingUpdateTimeSeconds": 1660409400,
+   "oldRating": 1049,
+   "newRating": 1087
+  },
+  {
+   "contestId": 1719,
+   "contestName": "Codeforces Round 814 (Div. 2)",
+   "handle": "3.141f",
+   "rank": 8468,
+   "ratingUpdateTimeSeconds": 1660667700,
+   "oldRating": 1087,
+   "newRating": 1067
+  },
+  {
+   "contestId": 1715,
+   "contestName": "Codeforces Round 816 (Div. 2)",
+   "handle": "3.141f",
+   "rank": 8200,
+   "ratingUpdateTimeSeconds": 1661014200,
+   "oldRating": 1067,
+   "newRating": 1055
+  },
+  {
+   "contestId": 1746,
+   "contestName": "Codeforces Global Round 23",
+   "handle": "3.141f",
+   "rank": 6526,
+   "ratingUpdateTimeSeconds": 1665852600,
+   "oldRating": 1055,
+   "newRating": 1068
+  },
+  {
+   "contestId": 1744,
+   "contestName": "Codeforces Round  828 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 4059,
+   "ratingUpdateTimeSeconds": 1665939000,
+   "oldRating": 1068,
+   "newRating": 1124
+  },
+  {
+   "contestId": 1811,
+   "contestName": "Codeforces Round 863 (Div. 3)",
+   "handle": "3.141f",
+   "rank": 2380,
+   "ratingUpdateTimeSeconds": 1680627000,
+   "oldRating": 1124,
+   "newRating": 1223
+  }
+ ]
+}
