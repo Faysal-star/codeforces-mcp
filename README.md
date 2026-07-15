@@ -1,126 +1,338 @@
 # codeforces-mcp
 
-An MCP server that gives coding agents access to Codeforces practice data, plus the
-verification harness that keeps it honest.
+An MCP server that gives coding agents access to Codeforces practice data. It helps
+you understand your weak tags and find problems you have not already solved.
 
-Built spec-first: [`SPEC.md`](SPEC.md) defines every tool contract and its acceptance
-criteria, and each criterion is asserted by a test in `tests/contract/`.
+The server is read-only, uses the public Codeforces API, and requires no Codeforces
+authentication. It works with VS Code Copilot, Claude Desktop/Code, and other MCP
+clients that support stdio servers.
 
-## Why it exists
+## Features
 
-The Codeforces website cannot answer the question you actually have when you sit down
-to practise: *"what am I bad at, and what should I solve next that I haven't already
-solved?"* Two of these tools answer exactly that.
+- Find problems by rating and tag, optionally excluding a user's solved problems.
+- Rank a handle's tags by solve rate and average solved rating.
+- Review recent submissions and filter by verdict.
+- Inspect a user's profile and rating history.
+- List upcoming contests.
+- Return results as readable Markdown or structured JSON.
+- Cache upstream responses locally and enforce a polite request rate.
 
-- `codeforces_tag_performance` ranks your tags by solve rate, weakest first. Codeforces
-  exposes no such endpoint; it is computed from your submission history.
-- `codeforces_search_problems` filters by rating and tag **excluding problems a handle
-  has already solved** — a filter the site itself does not offer.
+## Requirements
 
-## Tools
+- Python 3.10 or newer
+- A Codeforces handle for user-specific tools
+- VS Code with GitHub Copilot Agent mode, Claude, or another MCP-compatible client
 
-| Tool | What it answers |
-|---|---|
-| `codeforces_search_problems` | "5 unsolved dp problems rated 1300–1500" |
-| `codeforces_tag_performance` | "which tags am I weakest at?" |
-| `codeforces_recent_submissions` | "show my recent wrong answers" |
-| `codeforces_user_profile` | rating, max rating, rank, organization |
-| `codeforces_rating_history` | contest-by-contest deltas |
-| `codeforces_upcoming_contests` | what is scheduled next |
+No API key is required.
 
-All are read-only and need no authentication. Every tool takes
-`response_format: "markdown" | "json"`.
+## Installation
 
-## Install
+Clone the repository and create a virtual environment:
 
 ```bash
-pip install -e ".[dev]"
+git clone https://github.com/<owner>/codeforces-mcp.git
+cd codeforces-mcp
+python -m venv .venv
+```
+
+Activate the environment:
+
+```powershell
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+```
+
+```bash
+# macOS/Linux
+source .venv/bin/activate
+```
+
+Install the package:
+
+```bash
+python -m pip install -e .
+```
+
+For development, install the test and lint dependencies too:
+
+```bash
+python -m pip install -e ".[dev]"
+```
+
+The installation creates the `codeforces-mcp` command in the virtual environment.
+
+## Use With VS Code Copilot
+
+The repository includes a workspace configuration at `.vscode/mcp.json`. On Windows,
+it can point directly to the checked-out venv:
+
+```json
+{
+  "servers": {
+    "codeforces": {
+      "type": "stdio",
+      "command": "E:\\path\\to\\codeforces-mcp\\.venv\\Scripts\\codeforces-mcp.exe"
+    }
+  }
+}
+```
+
+Replace the path with the actual location of your clone. For macOS/Linux, use:
+
+```json
+{
+  "servers": {
+    "codeforces": {
+      "type": "stdio",
+      "command": "/path/to/codeforces-mcp/.venv/bin/codeforces-mcp"
+    }
+  }
+}
+```
+
+In VS Code:
+
+1. Run `MCP: Open Workspace Folder Configuration` from the Command Palette.
+2. Add or update the `codeforces` server entry.
+3. Open Copilot Chat and switch to **Agent** mode.
+4. Open the tools menu, start or enable the `codeforces` server, and allow the tools.
+
+Then ask Copilot something like:
+
+> Find me 5 unsolved DP problems rated 1300-1500 for handle `3.141f`.
+
+The server uses stdio, so VS Code starts and stops it as needed. Do not start a second
+copy manually while Copilot is connected.
+
+## Use With Claude
+
+After activating the venv, register the command with Claude Code:
+
+```bash
 claude mcp add codeforces -- codeforces-mcp
 ```
 
-## Real output
+If the command is not on your PATH, use the executable directly.
 
-`codeforces_tag_performance(handle="3.141f", min_attempted=8)`:
-
-```
-**3.141f** — 199/209 distinct problems solved
-
-| Tag | Solved | Attempted | Solve rate | Avg rating solved |
-| --- | --- | --- | --- | --- |
-| binary search | 8 | 10 | 80% | 1212.5 |
-| dp | 7 | 8 | 88% | 1128.6 |
-| number theory | 16 | 18 | 89% | 1000.0 |
-| two pointers | 8 | 9 | 89% | 1112.5 |
-| constructive algorithms | 34 | 37 | 92% | 905.9 |
-| implementation | 90 | 96 | 94% | 915.6 |
-| greedy | 73 | 75 | 97% | 942.5 |
-| strings | 31 | 31 | 100% | 893.5 |
+```powershell
+claude mcp add codeforces -- .\.venv\Scripts\codeforces-mcp.exe
 ```
 
-`codeforces_search_problems(min_rating=1300, max_rating=1500, tags=["dp"], exclude_solved_by="3.141f", limit=5)`:
+The equivalent macOS/Linux command is:
 
+```bash
+claude mcp add codeforces -- .venv/bin/codeforces-mcp
 ```
+
+## Tools
+
+All tools are read-only and support `response_format`, which is either `"markdown"`
+(the default) or `"json"`.
+
+### `codeforces_search_problems`
+
+Find problems, easiest first. Set `exclude_solved_by` to hide problems whose verdict
+for that handle is `OK`.
+
+| Parameter | Default | Description |
+| --- | --- | --- |
+| `min_rating` | none | Minimum rating, from 800 to 3500 |
+| `max_rating` | none | Maximum rating, from 800 to 3500 |
+| `tags` | `[]` | Up to 10 Codeforces tags |
+| `tags_match` | `"any"` | Use `"all"` to require every tag |
+| `exclude_solved_by` | none | Codeforces handle whose solved problems are excluded |
+| `limit` | `20` | Number of results, from 1 to 100 |
+| `offset` | `0` | Number of matching results to skip |
+| `response_format` | `"markdown"` | `"markdown"` or `"json"` |
+
+Example request:
+
+```text
+Find 5 unsolved dp problems rated 1300-1500 for 3.141f.
+```
+
+Equivalent arguments:
+
+```json
+{
+  "min_rating": 1300,
+  "max_rating": 1500,
+  "tags": ["dp"],
+  "exclude_solved_by": "3.141f",
+  "limit": 5
+}
+```
+
+### `codeforces_tag_performance`
+
+Compute per-tag attempts, solves, solve rate, and ratings for a handle. Results are
+ordered from weakest solve rate first. `min_attempted` prevents very small samples
+from dominating the ranking.
+
+```json
+{
+  "handle": "3.141f",
+  "min_attempted": 8,
+  "response_format": "markdown"
+}
+```
+
+### `codeforces_recent_submissions`
+
+List a handle's newest submissions. Use `verdict` such as `WRONG_ANSWER`,
+`TIME_LIMIT_EXCEEDED`, or `OK` to filter the list.
+
+```json
+{
+  "handle": "3.141f",
+  "verdict": "WRONG_ANSWER",
+  "limit": 10
+}
+```
+
+### `codeforces_user_profile`
+
+Show a handle's current rating, maximum rating, rank, and organization.
+
+```json
+{
+  "handle": "3.141f"
+}
+```
+
+### `codeforces_rating_history`
+
+Show contest-by-contest rating changes, oldest first. Set `limit` to return only the
+most recent contests.
+
+```json
+{
+  "handle": "3.141f",
+  "limit": 10
+}
+```
+
+### `codeforces_upcoming_contests`
+
+List contests that have not started yet, soonest first.
+
+```json
+{
+  "limit": 5
+}
+```
+
+## Output Example
+
+```text
 **5 of 208 matching problems** (offset 0, more available)
 
 | Rating | Problem | Tags | Link |
 | --- | --- | --- | --- |
-| 1300 | 189A — Cut Ribbon | brute force, dp | https://codeforces.com/problemset/problem/189/A |
-| 1300 | 234C — Weather | dp, implementation | https://codeforces.com/problemset/problem/234/C |
-| 1300 | 416B — Art Union | brute force, dp, implementation | https://codeforces.com/problemset/problem/416/B |
+| 1300 | 189A - Cut Ribbon | brute force, dp | https://codeforces.com/problemset/problem/189/A |
+| 1300 | 234C - Weather | dp, implementation | https://codeforces.com/problemset/problem/234/C |
+| 1300 | 416B - Art Union | brute force, dp, implementation | https://codeforces.com/problemset/problem/416/B |
 ```
 
-### What that output actually tells you
+The JSON format contains the same typed data for applications that need to process
+the result programmatically.
 
-Every solve rate above sits between 80% and 100%, which looks like mastery and is not.
-People attempt problems they expect to solve, so solve rate is censored upward by
-selection. The column doing the real work is `avg_rating_solved`: this handle is rated
-1223 but is solving mostly 900–1200 problems, which is the signature of practising
-inside the comfort zone rather than above it.
+## Cache and Rate Limits
 
-This is a known limitation of the metric, not a bug, and it is why the tool reports
-`avg_rating_solved` and `max_rating_solved` alongside the rate rather than ranking on
-rate alone. A future version could weight by problem difficulty relative to the user's
-rating; see `SPEC.md`.
+The Codeforces API documents approximately one request every two seconds. The client
+enforces a rate limit and stores responses in `~/.cache/codeforces-mcp` by default.
+Cache lifetimes reflect how often data changes: six hours for the problem set, five
+minutes for submissions, and one hour for user profiles.
 
+## Troubleshooting
 
-## The harness
+### Server does not start
 
-Three layers, because they fail in different ways.
+Check that the executable exists in the environment used by your MCP configuration:
 
-**Contract tests** (`tests/contract/`) run offline against API responses recorded into
-`tests/fixtures/`. Deterministic, no network, and they assert the acceptance criteria
-from `SPEC.md` by name.
-
-**Live drift tests** (`tests/live/`, `pytest -m live`) hit the real API and assert only
-that the upstream contract still holds. This is the gate for a dependency nobody here
-controls; it runs nightly rather than on every push.
-
-**Agent eval** (`eval/`) checks the layer the other two cannot: given a natural-language
-task, does the right tool get called with the right arguments, and does the result
-satisfy a semantic assertion? Cases live in `eval/cases/*.yaml`.
+```powershell
+Test-Path .\.venv\Scripts\codeforces-mcp.exe
+```
 
 ```bash
-pytest tests/contract -q     # offline, deterministic  (43 tests)
-pytest -m live -q            # upstream contract still holds (7 tests)
-python eval/run_eval.py      # writes eval/report.md          (12 cases)
-python eval/run_eval.py --live   # same cases against the real API
+./.venv/bin/codeforces-mcp
 ```
 
-The eval names the tool in each case; it does not yet drive a live model to *choose*
-the tool. Model-in-the-loop selection is the obvious next layer and is not implemented.
+If you installed into a different venv, update the `command` path in `mcp.json`.
 
-## Design notes
+### Codeforces returns an error
 
-Decisions and the measurements behind them are in [`SPEC.md`](SPEC.md). The three that
-shaped the most code:
+Check the handle spelling and try again later. The server passes actionable Codeforces
+error comments through to the client. The public API can also be temporarily rate
+limited or unavailable.
 
-- **`user.status` embeds `problem.tags` inline**, so tag analysis costs exactly one
-  upstream call rather than a join against the 2.25 MB problem set.
-- **Cache TTLs track volatility**: 6 h for the problem set, 5 minutes for your own
-  submissions, since those change while you practise.
-- **Everything is read as UTF-8 explicitly.** Codeforces returns UTF-8 and Python on
-  Windows defaults to cp1252, which raises `UnicodeDecodeError` on real problem titles.
+## Development
 
-## How it was built
+Run the deterministic checks before submitting a change:
 
-See [`docs/AGENTIC-WORKFLOW.md`](docs/AGENTIC-WORKFLOW.md).
+```bash
+ruff check .
+mypy src/
+pytest tests/contract -q
+python eval/run_eval.py
+```
+
+Live tests call Codeforces and are opt-in:
+
+```bash
+pytest -m live -q
+```
+
+### Rewrite Local Commit Dates
+
+The repository includes `rebase-commits-to-july.sh` for rewriting all commits
+on the current branch across 14 and 15 July 2026. It creates a backup branch before
+changing history:
+
+```bash
+bash rebase-commits-to-july.sh
+```
+
+The working tree must be clean, and the script must be run from a named branch. It
+rewrites commit IDs, so do not use it on a shared branch without coordination. To
+restore the original tip, use the backup branch printed by the script:
+
+```bash
+git reset --hard backup/pre-date-rebase-<timestamp>
+```
+
+Read [SPEC.md](SPEC.md) before changing tool behavior. It defines the contracts and
+acceptance criteria, and each criterion has a corresponding contract test.
+
+## Project Layout
+
+| Path | Purpose |
+| --- | --- |
+| `src/codeforces_mcp/client.py` | HTTP client, caching, rate limiting |
+| `src/codeforces_mcp/schemas.py` | Typed input and output models |
+| `src/codeforces_mcp/tools/` | MCP-independent tool logic |
+| `src/codeforces_mcp/server.py` | MCP registration and formatting |
+| `tests/contract/` | Offline fixture-backed contract tests |
+| `tests/live/` | Opt-in upstream drift tests |
+| `eval/` | Agent behavior evaluation cases |
+
+## Contributing
+
+1. Open an issue for a bug or proposed behavior change.
+2. Update `SPEC.md` and its contract test before changing behavior.
+3. Keep tool logic in `src/codeforces_mcp/tools/` free of MCP imports.
+4. Run the development checks and include relevant test output in the pull request.
+
+Please avoid committing virtual environments, caches, build output, or API recordings
+containing personal data. The repository `.gitignore` already excludes the local
+development artifacts created by this project.
+
+## License
+
+No license has been selected for this repository yet. Add a license before publishing
+the project for reuse so users know what permissions they have.
+
+## Related Documentation
+
+- [SPEC.md](SPEC.md) - tool contracts and design decisions
+- [docs/AGENTIC-WORKFLOW.md](docs/AGENTIC-WORKFLOW.md) - how the project was built

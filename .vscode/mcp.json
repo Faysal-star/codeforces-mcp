@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "codeforces": {
+      "type": "stdio",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\codeforces-mcp.exe"
+    }
+  }
+}
