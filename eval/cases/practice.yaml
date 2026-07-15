@@ -1,0 +1,86 @@
+# Practice-session tasks: the questions someone actually asks before sitting down
+# to solve. Each case pins the tool call a correct agent should make, and asserts
+# on the semantics of what comes back -- not just that it returned 200.
+
+- id: unsolved-dp-ladder
+  intent: "Find 5 dp problems rated 1300-1500 that 3.141f has not solved yet"
+  tool: codeforces_search_problems
+  args:
+    min_rating: 1300
+    max_rating: 1500
+    tags: [dp]
+    exclude_solved_by: "3.141f"
+    limit: 5
+  assert:
+    - count_between: [1, 5]
+    - all_ratings_between: [1300, 1500]
+    - all_have_tags: [dp]
+    - none_solved_by: "3.141f"
+    - sorted_ascending_by: rating
+
+- id: weakest-tags
+  intent: "Which Codeforces topics is 3.141f weakest at?"
+  tool: codeforces_tag_performance
+  args:
+    handle: "3.141f"
+    min_attempted: 5
+  assert:
+    - field_at_least: [total_attempted, 50]
+    - list_non_empty: weakest_first
+    - sorted_ascending_by: [weakest_first, solve_rate]
+    - each_solved_at_most_attempted: weakest_first
+
+- id: hard-unsolved-graphs
+  intent: "Give me graph problems above 1600 I have not solved"
+  tool: codeforces_search_problems
+  args:
+    min_rating: 1600
+    tags: [graphs]
+    exclude_solved_by: "3.141f"
+    limit: 10
+  assert:
+    - all_ratings_between: [1600, 3500]
+    - all_have_tags: [graphs]
+    - none_solved_by: "3.141f"
+
+- id: recent-failures
+  intent: "Show my recent wrong answers so I can review them"
+  tool: codeforces_recent_submissions
+  args:
+    handle: "3.141f"
+    verdict: WRONG_ANSWER
+    limit: 10
+  assert:
+    - list_non_empty: submissions
+    - all_field_equals: [submissions, verdict, WRONG_ANSWER]
+    - all_urls_are_codeforces: submissions
+
+- id: profile-lookup
+  intent: "What is 3.141f's current and peak rating?"
+  tool: codeforces_user_profile
+  args:
+    handle: "3.141f"
+  assert:
+    - field_equals: [handle, "3.141f"]
+    - field_at_least: [max_rating, 1000]
+    - field_is_iso_date: registered_at
+
+- id: rating-trajectory
+  intent: "How has 3.141f's rating moved across contests?"
+  tool: codeforces_rating_history
+  args:
+    handle: "3.141f"
+  assert:
+    - list_non_empty: history
+    - deltas_consistent: history
+    - sorted_ascending_by: [history, date]
+
+- id: tags-match-all-is-strict
+  intent: "Problems that are both dp AND greedy, not either"
+  tool: codeforces_search_problems
+  args:
+    tags: [dp, greedy]
+    tags_match: all
+    limit: 10
+  assert:
+    - all_have_tags: [dp, greedy]

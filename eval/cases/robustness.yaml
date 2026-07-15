@@ -1,0 +1,51 @@
+# Failure-mode cases. A tool that only behaves on the happy path is not shippable;
+# these assert that wrong input produces something an agent can recover from.
+
+- id: typo-tag-is-recoverable
+  intent: "Agent guesses 'dynamic programming' instead of the real tag 'dp'"
+  tool: codeforces_search_problems
+  args:
+    tags: ["dynamic programming"]
+    limit: 5
+  assert:
+    - count_equals: 0
+    - note_contains: "dynamic programming"
+    - note_contains: "dp"
+
+- id: unknown-verdict-lists-real-ones
+  intent: "Agent filters on a verdict that does not exist"
+  tool: codeforces_recent_submissions
+  args:
+    handle: "3.141f"
+    verdict: ALMOST_RIGHT
+    limit: 5
+  assert:
+    - count_equals: 0
+    - note_contains: "OK"
+
+- id: inverted-rating-band-rejected
+  intent: "Agent swaps the bounds"
+  tool: codeforces_search_problems
+  args:
+    min_rating: 1800
+    max_rating: 1200
+  assert:
+    - is_text_error: true
+    - text_contains: "max_rating"
+
+- id: unknown-handle-is-actionable
+  intent: "Agent mistypes a handle"
+  tool: codeforces_user_profile
+  args:
+    handle: "not_a_real_handle_zz"
+  assert:
+    - is_text_error: true
+    - text_contains: "not found"
+
+- id: limit_out_of_range_rejected
+  intent: "Agent asks for 5000 problems"
+  tool: codeforces_search_problems
+  args:
+    limit: 5000
+  assert:
+    - is_text_error: true
