@@ -335,4 +335,4 @@ the project for reuse so users know what permissions they have.
 ## Related Documentation
 
 - [SPEC.md](SPEC.md) - tool contracts and design decisions
-- [docs/AGENTIC-WORKFLOW.md](docs/AGENTIC-WORKFLOW.md) - how the project was built
+- [docs/TECHNICAL-OVERVIEW.md](docs/TECHNICAL-OVERVIEW.md) - architecture and implementation details
