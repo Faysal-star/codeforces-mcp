@@ -327,11 +327,6 @@ Please avoid committing virtual environments, caches, build output, or API recor
 containing personal data. The repository `.gitignore` already excludes the local
 development artifacts created by this project.
 
-## License
-
-No license has been selected for this repository yet. Add a license before publishing
-the project for reuse so users know what permissions they have.
-
 ## Related Documentation
 
 - [SPEC.md](SPEC.md) - tool contracts and design decisions
