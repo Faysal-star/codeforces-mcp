@@ -1,5 +1,7 @@
 # codeforces-mcp
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/faysal-star-codeforces-mcp-1se7yd?v=321d2bfc784352af445132338f056c54)](https://m8ven.ai/mcp/faysal-star-codeforces-mcp-1se7yd?s=readme)
+
 An MCP server that gives coding agents access to Codeforces practice data. It helps
 you understand your weak tags and find problems you have not already solved.
 
